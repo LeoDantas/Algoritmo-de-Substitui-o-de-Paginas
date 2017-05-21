@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+
+public class LRUStack{
+    private ArrayList<Integer> stack;
+    private int top;
+    private int base;
+
+    public LRUStack(){
+        this.stack = new ArrayList<>();
+        this.top = -1;
+        this.base = 0;
+    }
+
+    public boolean isEmpty(){
+        return this.top == -1;
+    }
+
+    public void push(Integer value){
+        if(this.stack.indexOf(value) == -1){
+            this.stack.add(value);
+            this.top++;
+            return;
+        }
+
+        this.stack.remove(value);
+        this.stack.add(value);
+        this.top++;
+    }
+
+    public void remove(Integer value){
+        if(!(this.stack.indexOf(value) == -1))
+            this.stack.remove(value);
+
+    }
+
+    public int takeBase(){
+        if(!(this.stack.isEmpty()))
+            return this.stack.get(0);
+        return 0;
+    }
+
+    public void printStack(){
+        for(int i : this.stack){
+            System.out.println(i);
+        }
+    }
+
+    public static void main(String[] args) {
+        LRUStack stack = new LRUStack();
+        stack.push(10);
+        stack.remove(10);
+    }
+
+}   
